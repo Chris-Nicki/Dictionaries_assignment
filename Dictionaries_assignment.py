@@ -88,26 +88,23 @@ def create_new_ticket():
     model = input("What model is the duck? ")
     problem = input("What is wrong with it? ")
     print("What is the status of the ticket")
-    def ticket_status():
-        open = input("Would you like to mark the ticket open or closed? ")
+    open = input("Would you like to mark the ticket open or closed? ")
+    while True:
         if open == "open" or open == "closed":
-                Ticket_Database[ticket_number] = {"Customer": [first_name, last_name], "Issue": [model, problem], "Status": [open]} 
+            if open == "open":
+                Ticket_Database["open_tickets"][ticket_number] = {"Customer": [first_name, last_name], "Issue": [model, problem], "Status": [open]} 
+            else:
+                Ticket_Database["closed_tickets"][ticket_number] = {"Customer": [first_name, last_name], "Issue": [model, problem], "Status": [open]}  
+            break  
         else:
-            print("Please enter open or closed.")
-    ticket_status()               
-#This is not working.... I just puts any used input at status even with the if elif
+            open = input("Would you like to mark the ticket open or closed? ")
     Ticket_Database[ticket_number] = {"Customer": [first_name, last_name], "Issue": [model, problem], "Status": [open]} 
-# I still need the ticket to go to the appropriate dictionary once created, using ths Ticket_Database as the index for all tickets   
-    
-   
-
-
 def locate_a_ticket():
     print("Lets find that service ticket!")
     while True:
         ticket_number = input("What is your ticket number? ") 
         if ticket_number in Ticket_Database:
-            print(Ticket_Database["ticket_number"])# I need to define ticket so it knows what to print
+            print(Ticket_Database[ticket_number])# I need to define ticket so it knows what to print
         else:
             print("Please enter a valid ticket number")
         break
